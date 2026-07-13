@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  githubId  String     @unique
+  username  String     @unique
+  name      String
+  avatarUrl String
+  email     String
+  portfolio Portfolio?
+  createdAt DateTime   @default(now())
+}
+
+model Portfolio {
+  id           String        @id @default(cuid())
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id])
+  bio          String        @default("")
+  theme        String        @default("minimal")
+  customDomain String?
+  amaEnabled   Boolean       @default(true)
+  aboutMe      String        @default("")
+  aboutMyWork  String        @default("")
+  projects     Project[]
+  amaQuestions AMAQuestion[]
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Project {
+  id              String    @id @default(cuid())
+  portfolioId     String
+  portfolio       Portfolio @relation(fields: [portfolioId], references: [id])
+  type            String
+  url             String
+  title           String
+  description     String    @default("")
+  techStack       String[]
+  primaryLanguage String?
+  isRunnable      Boolean   @default(false)
+  order           Int       @default(0)
+  metadata        Json
+  createdAt       DateTime  @default(now())
+}
+
+model AMAQuestion {
+  id                  String    @id @default(cuid())
+  portfolioId         String
+  portfolio           Portfolio @relation(fields: [portfolioId], references: [id])
+  question            String
+  answer              String
+  answeredFromContext Boolean   @default(true)
+  visitorId           String
+  askedAt             DateTime  @default(now())
+}
