@@ -9,14 +9,17 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.0",
     "@fastify/cors": "^9.0.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "5",
     "fastify": "^4.27.0",
     "octokit": "^3.1.0",
+    "pg": "^8.22.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@hehhi/types": "workspace:*",
-    "prisma": "^7.8.0",
+    "@types/pg": "^8.20.0",
+    "prisma": "5",
     "tsx": "^4.11.0",
     "typescript": "^5.4.0"
   }
