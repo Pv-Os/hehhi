@@ -8,7 +8,7 @@ import { githubRoutes } from './routes/github';
 const app = Fastify({ logger: true });
 
 app.register(cors, {
-  origin: process.env.NEXT_PUBLIC_APP_URL,
+  origin: process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
   credentials: true,
 });
 
