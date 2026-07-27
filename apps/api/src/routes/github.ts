@@ -2,6 +2,9 @@ import type { FastifyInstance } from 'fastify';
 import { Octokit } from 'octokit';
 import { PrismaClient } from '@prisma/client';
 import type { RepoMetadata } from '@hehhi/types';
+import NodeCache from 'node-cache';
+
+const cache = new NodeCache({ stdTTL: 60 * 60 * 24 }); // 24hr
 
 const prisma = new PrismaClient();
 
@@ -17,6 +20,11 @@ export async function githubRoutes(app: FastifyInstance) {
       if (!match) return reply.status(400).send({ error: 'Invalid GitHub URL' });
 
       const [, owner, repo] = match;
+
+      const cacheKey = `repo:${owner}:${repo}`;
+      const cached = cache.get(cacheKey);
+      if (cached) return reply.send(cached);
+
       const octokit = new Octokit({ auth: accessToken });
 
       try {
@@ -49,6 +57,7 @@ export async function githubRoutes(app: FastifyInstance) {
           },
         });
 
+        cache.set(cacheKey, project);
         return reply.send({ project });
       } catch (err: any) {
         return reply.status(502).send({ error: 'GitHub API error', detail: err.message });
