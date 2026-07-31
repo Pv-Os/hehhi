@@ -1,9 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { Octokit } from 'octokit';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../prisma/client';
 import type { RepoMetadata } from '@hehhi/types';
-
-const prisma = new PrismaClient();
 
 export async function githubRoutes(app: FastifyInstance) {
   // POST /api/github/import

@@ -1,7 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../prisma/client';
 
 export async function portfolioRoutes(app: FastifyInstance) {
   // GET /api/portfolio/:username — public, powers the portfolio page
