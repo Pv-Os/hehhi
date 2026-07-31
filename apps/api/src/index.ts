@@ -4,6 +4,7 @@ import { portfolioRoutes } from './routes/portfolio';
 import { amaRoutes } from './routes/ama';
 import { terminalRoutes } from './routes/terminal';
 import { githubRoutes } from './routes/github';
+import { erdRoutes } from './routes/erd';  
 
 const app = Fastify({ logger: true });
 
@@ -16,6 +17,7 @@ app.register(portfolioRoutes, { prefix: '/api/portfolio' });
 app.register(amaRoutes,       { prefix: '/api/ama' });
 app.register(terminalRoutes,  { prefix: '/api/terminal' });
 app.register(githubRoutes,    { prefix: '/api/github' });
+app.register(erdRoutes, { prefix: '/api/erd' });  
 
 app.get('/health', async () => ({ status: 'ok' }));
 
