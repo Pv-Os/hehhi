@@ -1,0 +1,47 @@
+openapi: 3.0.1
+info:
+  title: hehhi API
+  version: '0.1.0'
+  description: |
+    Minimal OpenAPI spec for the hehhi API. This is a starter spec intended to be expanded.
+servers:
+  - url: http://localhost:3001
+    description: Local development server
+paths:
+  /api/portfolio/{username}:
+    get:
+      summary: Get a public portfolio by username
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Portfolio found
+        '404':
+          description: Portfolio not found
+  /api/github/import:
+    post:
+      summary: Import a GitHub repo into a portfolio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                repoUrl:
+                  type: string
+                accessToken:
+                  type: string
+                portfolioId:
+                  type: string
+      responses:
+        '200':
+          description: Project imported
+        '400':
+          description: Invalid GitHub URL
+        '502':
+          description: GitHub API error

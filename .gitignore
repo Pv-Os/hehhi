@@ -5,3 +5,4 @@ dist/
 .env.local
 .turbo/
 *.log
+.DS_Store
