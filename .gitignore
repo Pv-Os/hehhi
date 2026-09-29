@@ -6,3 +6,34 @@ dist/
 .turbo/
 *.log
 .DS_Store
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Builds
+.next/
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temp
+tmp/
+temp/
